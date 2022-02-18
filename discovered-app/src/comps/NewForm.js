@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-const baseUrl = 'http://localhost:3003'
+const baseUrl = 'http://localhost:3001'
 
 export default class NewForm extends Component {
   constructor(){
@@ -48,7 +48,7 @@ export default class NewForm extends Component {
   render(){
     console.log(this.state.title);
     return(
-      <form onSubmit= {this.handleSumbit}>
+      <form class="newForm" onSubmit= {this.handleSumbit}>
         <label html='name'>Title: </label>
         <input type='text' id='title' name='title' onChange={(event) => this.handleChange(event)} value={this.state.title}/>
         <input type='submit' value='Title of Song'/> <br/>

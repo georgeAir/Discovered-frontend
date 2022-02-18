@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
+import Card from 'react-bootstrap/Card'
 
-const baseUrl = 'http://localhost:3003'
+const baseUrl = 'http://localhost:3001'
 
 export default class MyPlaylist extends Component{
   constructor(){
@@ -9,23 +10,38 @@ export default class MyPlaylist extends Component{
     this.state = {
       baseUrl: 'https://api.spotify.com/v1/',
       myPlaylist: [],
+      tracks:[],
       artist: '',
       album: '',
       title: '',
       playlistToBeEdited:{},
       modelOpen: false,
+      availablePlaylists:false
     }
   }
 
 getMyPlaylist = () => {
   const searchURL = this.state.baseUrl + "me/playlists";
   fetch(searchURL, {headers: {
-    'Authorization': 'Bearer BQDjL8tdqCS1QDL9fjFprDRxepdXJ17FvzITEz72VQAimNrHcKiQaw3GzbLQBA7bvTBwbfnOBEbJXAjCYe-FZr2RqIyGX2Whg9AYi5Urfbs27wDeA-RPA9d9MQi3oSJDtgAxQCp_5gjDO5cGX8mdtpFhGWA588-MnNI2i0PG-8NqkdLD1gYpfZjuxY9-vtitiUkV-IfN6l9AHW9SnJwpYMsbSA'
+    'Authorization':'Bearer BQDwPcxIYGZ0qKfkebzL3E6_O7MCVQXtgQj4jRjnqPk-JZhVjgi8fjyC4P7I-BDlwpTS8iZ_UYJkhGBxFE93En3VnXTYlkG8k6u4NgvAX2w6W0HX81sbDi5ffhSxjiW5VrtDNa8IEqzz-x0uYvkBjIirXYGVmXXopENpzMVoujohUqFDP1TilgtZtHNFysaVLNn9guFijZq6HnenZ-7oTeJS6g'
   }},)
     .then((res) => res.json())
     .then((json) =>
       this.setState({
-        playlists: json,
+        myPlaylist: json.items,
+      })
+    );
+};
+
+getTracks = () => {
+  const searchURL = this.state.baseUrl + "playlists/1ffZgrxA1ftyJHyMpLbjzd/tracks";
+  fetch(searchURL, {headers: {
+    'Authorization':'Bearer BQAjXw3L-9QrlozFUPxzPaqZakmmuS3oVftF2xaVQpGAYQEiWXkilUVK1s-76nUIsLC7tqC_Ah8EjfGjctGQsH-4sG3UUbtXlVdNsSWi0YwIWwWJcTO06SiqbnLqLED83UIO1_0tC8wyqTkxlk3wf3-ivI5g8YSeypiLO3cQzkUAEP0SnIYpZKQkdrikilga8S3SttA2KKEFYCLM72XCsJPKGg'
+  }},)
+    .then((res) => res.json())
+    .then((json) =>
+      this.setState({
+        tracks: json.items[0],
       })
     );
 };
@@ -73,22 +89,33 @@ handleChange = (event) => {
 }
 componentDidMount(){
   this.getMyPlaylist()
+  this.getTracks()
 }
 
   render(){
-    console.log(this.state);
+    console.log(this.state.myPlaylist);
+    console.log(this.state.tracks);
     return(
-      <div>
-      {this.state.myPlaylist.map((playlist, i) => {
-        return (
-        <ul>
-          <li>Title:{playlist.title}</li>
-          <li>Artist:{playlist.artist}</li>
-          <li>Album:{playlist.album}</li>
-        </ul>
-      )
-      })}
-    </div>
+      <>
+      <div id='container'>
+        <div class="cardDiv" id="cardDiv">
+              {this.state.myPlaylist.map((playlist, i) => {
+                return (
+                <div class="card-group" id="cardGroup">
+              <div class="card">
+                <img class="card-img-top" src={`${playlist.images[0].url}`} alt="image"/>
+                <div class="card-body">
+                  <h5 class="card-title">{playlist.name}</h5>
+                  <a class="card-text" id="cardText" href='https://api.spotify.com/v1/playlists/1ffZgrxA1ftyJHyMpLbjzd/tracks'> songs </a>
+                  <p class="card-text"><small class="text-muted">tracks:{playlist.tracks.total}</small></p>
+                  </div>
+                </div>
+              </div>
+              )
+            })}
+        </div>
+      </div>
+    </>
     )
   }
 }

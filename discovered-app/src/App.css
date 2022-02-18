@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: black;
 }
 
 .App-logo {
@@ -39,4 +40,35 @@
 
 ul{
   list-style: none
+}
+
+#cardGroup{
+ height: 10%;
+ width: 20%;
+ display: inline-flex;
+ padding: 2%;
+}
+#cardDiv{
+  display: inline;
+}
+#cardText{
+  color: blue;
+}
+#discovered{
+  color: white;
+  font-size:30px;
+}
+
+h2{
+  color:white;
+}
+button{
+  color: white;
+}
+label{
+  color: white;
+}
+.customDiv{
+  width:70%;
+  margin-left: 15%;
 }

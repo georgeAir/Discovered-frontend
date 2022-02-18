@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import NewForm from './NewForm'
 import MyPlaylist from './MyPlaylist'
 import Table from 'react-bootstrap/Table'
+import Nav from './Nav'
 
-const baseUrl = 'http://localhost:3003'
+const baseUrl = 'http://localhost:3001'
 
 export default class Playlists extends Component{
   constructor(){
@@ -59,7 +60,6 @@ fetch(this.state.baseURL + "/users/signup", {
   .then((res) => res.json())
   .then((resJson) => {
     console.log(resJson);
-    // call getHolidays TO GET ALL THE HOLIDAYS AND REFRESH PAGE
   });
 };
 
@@ -76,23 +76,23 @@ fetch(this.state.baseURL + "/users/signup", {
       return []
     }
   }).then(data => {
-    // console.log(data);
+    console.log(data);
     this.setState({
       playlists:data
     })
   })
 }
 
-getMyPlaylist = () => {
-  const searchURL = this.state.baseURL + "me/playlists";
-  fetch(searchURL)
-    .then((res) => res.json())
-    .then((json) =>
-      this.setState({
-        playlists: json,
-      })
-    );
-};
+// getMyPlaylist = () => {
+//   const searchURL = this.state.baseURL + "me/playlists";
+//   fetch(searchURL)
+//     .then((res) => res.json())
+//     .then((json) =>
+//       this.setState({
+//         playlists: json,
+//       })
+//     );
+// };
 
 deletePlaylist = (id) => {
   console.log(id)
@@ -113,7 +113,7 @@ deletePlaylist = (id) => {
   })
 }
 addPlaylist = (newPlaylist) => {
-  // update state with the new holiday from the NewForm Component
+  // update state with the new playlist from the NewForm Component
   const copyPlaylists = [...this.state.playlists]
   copyPlaylists.push(newPlaylist)
   this.setState({
@@ -164,51 +164,41 @@ handleChange = (event) => {
 }
 componentDidMount(){
   this.getPlaylists()
-  this.getMyPlaylist()
+  // this.getMyPlaylist()
 }
 
   render(){
-    console.log(this.state);
+    console.log(this.state.playlists);
     return(
       <div>
+      <Nav/>
       <MyPlaylist/>
-      <h2>Custom Playlist</h2>
-      {this.state.playlists.map((playlist, i) => {
-        return (
+      <div class='customDiv'>
+        <h2>Custom Playlist</h2>
           <Table variant="dark" striped bordered hover variant="dark">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Title</th>
-          <th>Artist</th>
-          <th>Album</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>{playlist.title}</td>
-          <td>{playlist.artist}</td>
-          <td>{playlist.album}</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>{playlist.title}</td>
-          <td>{playlist.artist}</td>
-          <td>{playlist.album}</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>{playlist.title}</td>
-          <td>{playlist.artist}</td>
-          <td>{playlist.album}</td>
-        </tr>
-      </tbody>
-      <button onClick= {() => this.showEditForm(playlist)}> Edit Title </button>
-      <button onClick={() => this.deletePlaylist(playlist._id)}>Delete:❌</button>
-    </Table>
-      )
-      })}
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Album</th>
+              </tr>
+            </thead>
+            <tbody>
+            {this.state.playlists.map((playlist, i) => (
+              <tr key={i}>
+                <td>{i+1}</td>
+                <td>{playlist.title}</td>
+                <td>{playlist.artist}</td>
+                <td>{playlist.album}</td>
+                <button onClick={() => this.showEditForm(playlist)}> Edit Title </button>
+                <button onClick={() => this.deletePlaylist(playlist._id)}>Delete:❌</button>
+              </tr>
+            ))}
+
+            </tbody>
+          </Table>
+    </div>
       {
           this.state.modalOpen &&
           <form onSubmit= {this.handleSumbit}>
