@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-const baseUrl = 'http://localhost:3001'
+const baseUrl = 'https://discovrd-backend.herokuapp.com'
 
 export default class NewForm extends Component {
   constructor(){

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Card from 'react-bootstrap/Card'
 
-const baseUrl = 'http://localhost:3001'
+const baseUrl = 'https://discovrd-backend.herokuapp.com'
 
 export default class MyPlaylist extends Component{
   constructor(){
