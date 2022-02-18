@@ -23,7 +23,7 @@ export default class MyPlaylist extends Component{
 getMyPlaylist = () => {
   const searchURL = this.state.baseUrl + "me/playlists";
   fetch(searchURL, {headers: {
-    'Authorization':'Bearer BQDwPcxIYGZ0qKfkebzL3E6_O7MCVQXtgQj4jRjnqPk-JZhVjgi8fjyC4P7I-BDlwpTS8iZ_UYJkhGBxFE93En3VnXTYlkG8k6u4NgvAX2w6W0HX81sbDi5ffhSxjiW5VrtDNa8IEqzz-x0uYvkBjIirXYGVmXXopENpzMVoujohUqFDP1TilgtZtHNFysaVLNn9guFijZq6HnenZ-7oTeJS6g'
+    'Authorization':'Bearer BQDW4qlVwTojmlj63fmyPNVPLavHudsUqCaEIv4UIKrhyA4i1BlUufU3lHVcFIwM3OQLbTvjQmAXcVZVLo3VvMzisKKP_LBQAKRFq_81gm9Q8n1e0JW_2E5OfEHcFebZlWDLuTnW4Ydi5h1wNyAPET23kp7j-0xSnOmZXEHiN53jX8pX3x2RGAC1fJSssItlWhFrS-On3-eAYERUmaCaIHVWrQ'
   }},)
     .then((res) => res.json())
     .then((json) =>
@@ -36,7 +36,7 @@ getMyPlaylist = () => {
 getTracks = () => {
   const searchURL = this.state.baseUrl + "playlists/1ffZgrxA1ftyJHyMpLbjzd/tracks";
   fetch(searchURL, {headers: {
-    'Authorization':'Bearer BQAjXw3L-9QrlozFUPxzPaqZakmmuS3oVftF2xaVQpGAYQEiWXkilUVK1s-76nUIsLC7tqC_Ah8EjfGjctGQsH-4sG3UUbtXlVdNsSWi0YwIWwWJcTO06SiqbnLqLED83UIO1_0tC8wyqTkxlk3wf3-ivI5g8YSeypiLO3cQzkUAEP0SnIYpZKQkdrikilga8S3SttA2KKEFYCLM72XCsJPKGg'
+    'Authorization':'Bearer BQCZm1Jk6syLDU5CfKAvYiVZNItBBLHFXAyMeQqp1-bv-XFcSgoUvtEDeJl2Drt7RWMRvvF_Dt5Kcm8y1J64tfCm9y_NbPUYfMm55l064fBa39iY4NOP1gEdHVwiqOHJkt6S6i_x0U_F7_tsPRgBw89xBA2pZkTiR5KPkbfazOMvvibMIZsP-q8wcHpKHE9kJBt_kfntZGa8G5Bg2L5JX975HA'
   }},)
     .then((res) => res.json())
     .then((json) =>
